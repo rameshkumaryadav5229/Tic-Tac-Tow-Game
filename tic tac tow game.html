@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic To Tac Game</title>
+<style>
+
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    text-align: center;
+    background-color:aqua;
+    
+}
+.container{
+            height:300px;
+            display: flex;
+            justify-content:center;
+            
+}
+
+
+.game{
+    height:200px;
+    width: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    gap:6px;
+    margin-top: 20px;
+    
+    
+    
+}
+#reset{
+
+    height:40px;
+    width:160px;
+    font-size: 25px;
+    font-weight: 30px;
+    background-color: fuchsia;
+    color: white;
+    border: none;
+}
+
+
+
+.box {
+height: 60px;
+width: 60px;
+border-radius: 12px;
+box-shadow:1px 2px red;
+border: none;
+background-color:pink;
+color:rgb(204, 31, 126);
+font-size: 40px;
+
+
+}
+h1{
+
+    color:black;
+    margin-top: 70px;
+
+}
+#msg{
+
+    color:darkgreen;
+    font-size: 40px;
+    font-weight:100px; 
+}
+
+</style>
+</head>
+<body>
+    <main>
+        <h1>Tic Tac Toe Game</h1><br>
+	<h3>Winner is:</h3>
+        <p id="msg"></p>
+        
+        <div class="container">
+            <div class="game">
+               
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                <button class="box"></button>
+                
+            </div>
+        </div>
+    </main>
+    <button id="reset">
+                Reset
+        </button>
+    <script>
+
+let boxes=document.querySelectorAll(".box");
+let resetbtn=document.getElementById("reset");
+let msg=document.querySelector("#msg");
+let true0=true;
+let checkwinner=[
+    [0,1,2],
+    [0,3,6],
+    [0,4,8],
+    [1,4,7],
+    [2,5,8],
+    [2,4,6],
+    [3,4,5],
+    [6,7,8],
+
+];
+let resetgame=()=>{
+    turn0=true;
+    enablebox();
+
+}
+
+
+let disablebox=()=>{
+
+    for(box of boxes){
+        box.disabled=true;
+    }
+}
+
+let enablebox=()=>{
+
+    for(box of boxes){
+        box.disabled=false;
+        box.innerText="";
+        msg.innerHTML="";
+    }
+}
+
+boxes.forEach((box) =>{
+box.addEventListener("click",()=>{
+if(true0){
+box.innerHTML="O";
+true0=false;
+}
+else{
+box.innerHTML="X";
+true0="true";
+}
+box.disabled=true;
+checkwinnerf();
+});
+});
+
+
+const checkwinnerf = ()=>{
+
+for(let winner of checkwinner)
+{
+    let posi1=boxes[winner[0]].innerHTML;
+    let posi2=boxes[winner[1]].innerHTML;
+    let posi3=boxes[winner[2]].innerHTML;
+    if(posi1!="" && posi2!="" && posi3!=""){
+        if(posi1==posi2 && posi2==posi3){
+		
+            msg.innerText=posi1;
+
+		
+	  disablebox();
+           
+
+        }
+    }
+    
+}
+
+
+};
+ 
+resetbtn.addEventListener("click",resetgame);
+
+
+
+</script>   
+</body>
+</html>
+   
